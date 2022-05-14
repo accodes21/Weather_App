@@ -4,9 +4,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <title>Weather</title>
 </head>
 <body>
-    
+    <div class="weather">
+        <div class="container">
+            <div class="brand">Weather</div>
+            <div class="display">
+                <h1 class="temp">16&#176;</h1>
+                <div class="city-time">
+                    <h1 class="name">Delhi</h1>
+                    <small>
+                        <span class="time">15:00</span>
+                        -
+                        <span class="date">Saturday May 14</span>
+                    </small>
+                </div>
+                <div class="weather-box">
+                    <img src="icons/day/113.png" class="icon" width="55px" alt="icon">
+                    <span class="info">Sunny</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <form id="location">
+                <input type="text" name="location" class="search" placeholder="Search Location...">
+                <button type="submit" class="btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <ul class="cities">
+                <li class="city">New York</li>
+                <li class="city">Dubai</li>
+                <li class="city">London</li>
+            </ul>
+            <ul class="details">
+                <h3>Weather Details</h3>
+                <li>
+                    <span>Cloudy <i class="fas fa-cloud"></i></span>
+                    <span class="cloud">33%</span>
+                </li>
+                <li>
+                    <span>Humidity <i class="fas fa-droplet"></i></span>
+                    <span class="humid">68%</span>
+                </li>
+                <li>
+                    <span>Wind Speed <i class="fas fa-wind"></i></span>
+                    <span class="wind">4km/h</span>
+                </li>
+            </ul>
+            <p class="foot">Made by Aarya Chopkar</p>
+        </div>
+    </div>
 </body>
 </html>

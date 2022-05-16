@@ -11,7 +11,7 @@ const icon = document.querySelector(".icon");
 const form = document.querySelector(".location");
 const search = document.querySelector(".search");
 const btn = document.querySelector(".btn");
-const cloud = document.querySelector(".cloud");
+const feel = document.querySelector(".feel");
 const humid = document.querySelector(".humid");
 const wind = document.querySelector(".wind");
 const cities = document.querySelectorAll(".city");
@@ -27,7 +27,7 @@ cities.forEach((city)=>{
         fetchWeatherData();
 
         //fade screen
-        // app.style.opacity = "0";
+        app.style.opacity = "0";
 
     });
 })
@@ -45,24 +45,13 @@ form.addEventListener("submit",(e)=>{
 
         search.value = "";
 
-        // app.style.opacity = "0";
+        app.style.opacity = "0";
     }
 
     e.preventDefault();
 });
 
-function DayofWeek(day, month, year){
-    const weekday = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-    ];
-    return weekday[new Date(`${day}/${month}/${year}`).getDay()];
-};
+
 
 function fetchWeatherData(){
     //fetching data and dynamically adding cityinput.
@@ -84,12 +73,100 @@ function fetchWeatherData(){
         const time = date.substr(11);
 
         //changing format of date
-        dateOutput.innerHTML = `${DayofWeek(d, m, y)} ${d}, ${m} ${y}`;
+        dateOutput.innerHTML = `${d}/ ${m}/ ${y}`;
         timeOutput.innerHTML = time;
         cityname.innerHTML = data.location.name;
 
         //getting icon
         const iconId = data.current.condition.icon.substr("//cdn.weatherapi.com/weather/64x64/".length);
-        // icon.src = 
+        icon.src = "./icons/" + iconId;
+        
+        //info about weather
+        feel.innerHTML = data.current.feelslike_c + "&#176;";
+        humid.innerHTML = data.current.humidity + "%";
+        wind.innerHTML = data.current.wind_kph + "km/h";
+
+        let timeofday = "day";
+        const code = data.current.condition.code
+
+        //change to night if city time is night
+        if(!data.current.is_day){
+            timeofday = "night";
+        }
+
+        if(code==1000){
+            //bg to clear
+            app.style.backgroundImage = `url(./images/${timeofday}/clear.jpg)`;
+            btn.style.background = "#d2691e";
+            if(timeofday == "night"){
+                btn.style.background = "#181e27";
+            }
+        }
+        //cloudy
+        else if(
+            code == 1003 ||
+            code == 1006 ||
+            code == 1009 ||
+            code == 1030 ||
+            code == 1069 ||
+            code == 1035 ||
+            code == 1087 ||
+            code == 1073 ||
+            code == 1076 ||
+            code == 1079 ||
+            code == 1082 
+        ){
+            app.style.backgroundImage = `url(./images/${timeofday}/cloudy.jpg)`;
+            btn.style.background = "#d2691e";
+            if(timeofday == "night"){
+                btn.style.background = "#181e27";
+            }
+        }
+
+        else if(
+            code == 1063 ||
+            code == 1069 ||
+            code == 1072 ||
+            code == 1150 ||
+            code == 1153 ||
+            code == 1180 ||
+            code == 1183 ||
+            code == 1186 ||
+            code == 1189 ||
+            code == 1192 ||
+            code == 1195 ||
+            code == 1204 ||
+            code == 1207 ||
+            code == 1240 ||
+            code == 1243 ||
+            code == 1246 ||
+            code == 1249 ||
+            code == 1252
+        ){
+            app.style.backgroundImage = `url(./images/${timeofday}/rainy.jpg)`;
+            btn.style.background = "#d2691e";
+            if(timeofday == "night"){
+                btn.style.background = "#181e27";
+            }
+        }
+
+        else{
+            app.style.backgroundImage = `url(./images/${timeofday}/snowy.jpg)`;
+            btn.style.background = "#d2691e";
+            if(timeofday == "night"){
+                btn.style.background = "#181e27";
+            }
+        }
+
+        app.style.opacity = "1";
     })
+
+    .catch(() =>{
+        alert("City Not Found, Please Try Again");
+        app.style.opacity = "1";
+    });
 }
+
+fetchWeatherData();
+
+app.style.opacity = "1";

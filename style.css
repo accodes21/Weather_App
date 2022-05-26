@@ -169,3 +169,27 @@ body{
 .foot{
     text-align: center;
 }
+
+@media screen and (max-width:850px) {
+    .container{
+        padding: 4em 1.5em 3em 1.5em;
+    }
+
+    .temp{
+        font-size: 6em;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .panel,.container{
+        position: relative;
+        width: 100%;
+        top: initial;
+    }
+}
+
+@media screen and (max-width:600px) {
+    html{
+        font-size: 14px;
+    }
+}

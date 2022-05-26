@@ -157,7 +157,6 @@ function fetchWeatherData(){
                 btn.style.background = "#181e27";
             }
         }
-
         app.style.opacity = "1";
     })
 
